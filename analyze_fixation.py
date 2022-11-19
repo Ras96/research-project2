@@ -2,6 +2,7 @@ import csv
 import os
 import re
 
+
 def analyze_fixation(filename):
   data = {}
   with open(filename, "r", encoding="utf-8") as f:
@@ -22,8 +23,7 @@ def analyze_fixation(filename):
           "End": float(row[4]),
         })
   res = {}
-  for key in data:
-    value = data[key]
+  for key, value in data.items():
     res[key] = {
       "Count": len(value),
       "TotalTime": 0,
@@ -43,7 +43,7 @@ with open("dist/analyze_fixation.csv", "w", encoding="utf-8", newline="") as f:
       for filename in os.listdir(os.path.join("data", group, subject_and_time)):
         if filename == "Fixation.csv":
           res = analyze_fixation(os.path.join("data", group, subject_and_time, filename))
-          for key in res:
+          for key, value in res.items():
             groupnum = re.findall(r"\d+", group)[0]
             subjectnum, timenum = re.findall(r"\d+", subject_and_time)
             writer.writerow([
@@ -51,7 +51,7 @@ with open("dist/analyze_fixation.csv", "w", encoding="utf-8", newline="") as f:
               subjectnum,
               timenum,
               key,
-              res[key]["Count"],
-              "{:.2f}".format(res[key]["TotalTime"]),
-              "{:.2f}".format(res[key]["TotalDistance"])
+              value["Count"],
+              "{:.2f}".format(value["TotalTime"]),
+              "{:.2f}".format(value["TotalDistance"])
             ])
