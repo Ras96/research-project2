@@ -38,8 +38,6 @@ def analyze_fixation(filename):
 with open("dist/analyze_fixation.csv", "w", encoding="utf-8", newline="") as f:
   writer = csv.writer(f)
   writer.writerow(["Group", "Subject", "Time", "Media", "Count", "TotalTime", "TotalDistance"])
-  # data/ 以下のFixation.csvを探索
-  # 例: data/Group1/Sub1_1/Fixation.csv
   for group in sorted(os.listdir("data")):
     for subject_and_time in sorted(os.listdir(os.path.join("data", group))):
       for filename in os.listdir(os.path.join("data", group, subject_and_time)):
@@ -48,7 +46,6 @@ with open("dist/analyze_fixation.csv", "w", encoding="utf-8", newline="") as f:
           for key in res:
             groupnum = re.findall(r"\d+", group)[0]
             subjectnum, timenum = re.findall(r"\d+", subject_and_time)
-            # 小数点以下2桁まで表示
             writer.writerow([
               groupnum,
               subjectnum,
