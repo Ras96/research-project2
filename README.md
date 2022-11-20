@@ -12,6 +12,9 @@
     - 停留点の数
     - 総停留時間
     - 停留点間の総距離
+- `boxplot_fixation.py`
+  - **事前に`analyze_fixation.py`の実行が必要です**
+  - `analyze_fixation.py`の実行結果を箱ひげ図にして`dist/boxplot_fixation_{count,totaltime,totaldistance}.png`に出力します
 - `calculate_typical.py`
   - **事前に`analyze_fixation.py`の実行が必要です**
   - `analyze_fixation.py`の実行結果から代表値を算出し、以下のファイルに出力します

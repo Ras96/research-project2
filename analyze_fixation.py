@@ -2,6 +2,13 @@ import csv
 import os
 import re
 
+keydict = {
+    "[M-1]": "0_in",
+    "[M-3]": "1_2d",
+    "[M-0]": "2_in",
+    "[M-2]": "3_3d",
+}
+
 
 def analyze_fixation(filename):
     data = {}
@@ -56,7 +63,7 @@ with open("dist/analyze_fixation.csv", "w", encoding="utf-8", newline="") as f:
                                 groupnum,
                                 subjectnum,
                                 timenum,
-                                key,
+                                keydict[key],
                                 value["Count"],
                                 "{:.2f}".format(value["TotalTime"]),
                                 "{:.2f}".format(value["TotalDistance"]),
